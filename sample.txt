@@ -1,5 +1,2 @@
-#+
-==
-"This is a string"
-5 6
-if this is that
+#th
+>=

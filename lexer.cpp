@@ -130,7 +130,7 @@ char peek(){
 
 //skip whitespaces in the source file, except new lines
 void skipWhiteSpace(){
-  while(currentChar == ' ' || currentChar == '\t' || currentChar == '\r'){
+  while(currentChar == ' ' || currentChar == '\t'){
     nextChar();
   } 
 }
@@ -138,11 +138,12 @@ void skipWhiteSpace(){
 //skip comments in the source file
 //by typing a '#' you indicate that there is a single line comment in which case that line will be skipped
 void skipComment(){
-  if (currentChar == '#'){
+  if (currentChar == '#'){ 
     while(currentChar != '\n'){
-      cout<<"Skipping"<<endl; 
       nextChar();
+      cout<<"Skipping"<<endl; 
     }
+    nextChar(); 
   }
 }
 
@@ -164,6 +165,7 @@ void getToken(){
     token = Token(&currentChar, END);
   }else if(currentChar == '='){ 
     if(peek() == '='){
+      cout<<"found the second equal"; 
       token = Token(&currentChar, EQEQ);
       nextChar(); 
     }else{
@@ -248,7 +250,6 @@ void getToken(){
   else if(currentChar == '\"'){
     nextChar(); 
     string str = "";
-    str = str + currentChar; 
     while(currentChar != '\"'){
       if(currentChar == '\n' || currentChar == '\r' || currentChar == '\t'){
         cout<<"Illegal character in string"; 
